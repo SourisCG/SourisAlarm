@@ -1,0 +1,166 @@
+/* =========================================
+    VARIABLES GLOBALES
+   ========================================= */
+.root {
+    -fx-base: #ffffff;
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #2d3436;          
+    -fx-secondary-text: #b2bec3;     
+    -fx-accent: #00cec9;             
+    -fx-font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.dark-mode {
+    -fx-base: #000000;
+    -fx-background-color: #121212;   
+    -fx-text-fill: #ffffff;          
+    -fx-secondary-text: #dfe6e9;
+    -fx-accent: #00d2d3;             
+}
+
+/* =================================================================
+    RELOJ - SOLUCIÓN NUCLEAR (IDs # para máxima prioridad)
+   ================================================================= */
+
+/* 1. ELIMINAR LA CAJA EXTERNA */
+#spinnerHoras, #spinnerMinutos,
+#spinnerHoras:focused, #spinnerMinutos:focused,
+#spinnerHoras:hover, #spinnerMinutos:hover {
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-radius: 0 !important;
+    -fx-border-width: 0 !important;
+    -fx-border-color: transparent !important;
+    -fx-effect: null !important;
+}
+
+/* 2. ELIMINAR LA CAJA INTERNA (EL TEXTFIELD) - AQUÍ ESTÁ LA CLAVE */
+#spinnerHoras .text-field, #spinnerMinutos .text-field {
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-width: 0 !important;
+    -fx-padding: 0 !important;
+    
+    /* Configuración de fuente */
+    -fx-font-size: 96px !important;
+    -fx-font-weight: normal;
+    -fx-text-fill: -fx-text-fill !important;
+    -fx-display-caret: false;
+}
+
+/* 3. ALINEACIÓN TEXTO */
+#spinnerHoras .text-field { -fx-alignment: CENTER_RIGHT !important; }
+#spinnerMinutos .text-field { -fx-alignment: CENTER_LEFT !important; }
+
+/* 4. MATAR LAS FLECHAS Y BOTONES (Arriba/Abajo) */
+#spinnerHoras .increment-arrow-button, #spinnerHoras .decrement-arrow-button,
+#spinnerMinutos .increment-arrow-button, #spinnerMinutos .decrement-arrow-button {
+    -fx-padding: 0 !important;
+    -fx-shape: null !important;
+    -fx-pref-width: 0 !important; 
+    -fx-pref-height: 0 !important;
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+}
+
+/* 5. DOS PUNTOS */
+.clock-colon {
+    -fx-font-size: 80px;
+    -fx-text-fill: -fx-text-fill;
+    -fx-padding: 0 0 20 0;
+}
+
+/* 6. AM/PM */
+.am-pm-toggle {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-secondary-text;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 50 0 0 10;
+}
+.am-pm-toggle:selected { -fx-text-fill: -fx-accent; }
+
+/* 7. COLORES EN MODO OSCURO */
+.dark-mode #spinnerHoras .text-field, 
+.dark-mode #spinnerMinutos .text-field,
+.dark-mode .clock-colon { 
+    -fx-text-fill: white !important; 
+}
+.dark-mode .am-pm-toggle { -fx-text-fill: #636e72; }
+.dark-mode .am-pm-toggle:selected { -fx-text-fill: #00d2d3; }
+
+
+/* =========================================
+    BARRA LATERAL Y VOLUMEN (Visible en Oscuro)
+   ========================================= */
+
+/* SCROLLBAR */
+.scroll-bar:vertical { -fx-background-color: transparent; }
+.scroll-bar:vertical .track { -fx-background-color: transparent; }
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(128, 128, 128, 0.3);
+    -fx-background-radius: 2em;
+}
+/* Fix para ver la barra en fondo negro */
+.dark-mode .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.3) !important;
+}
+.dark-mode .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.5) !important;
+}
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0; -fx-shape: null;
+}
+
+/* SLIDER VOLUMEN */
+.slider .track { 
+    -fx-background-color: rgba(128, 128, 128, 0.2); 
+    -fx-pref-height: 4px; 
+    -fx-background-radius: 10;
+}
+/* Fix para ver el riel en fondo negro */
+.dark-mode .slider .track { 
+    -fx-background-color: rgba(255, 255, 255, 0.3) !important; 
+}
+.slider .thumb { 
+    -fx-background-color: -fx-accent; 
+    -fx-background-radius: 100em; 
+}
+
+/* =========================================
+    RESTO DE LA UI
+   ========================================= */
+.button-save {
+    -fx-background-color: -fx-accent; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;
+    -fx-background-radius: 50em; -fx-padding: 12 50; -fx-cursor: hand;
+}
+.dark-mode .button-save { -fx-text-fill: #121212; }
+
+.day-toggle {
+    -fx-background-color: transparent; -fx-text-fill: -fx-secondary-text; -fx-font-size: 14px; -fx-font-weight: bold;
+    -fx-min-width: 40px; -fx-min-height: 40px; -fx-background-radius: 100em; -fx-cursor: hand;
+}
+.day-toggle:selected {
+    -fx-text-fill: -fx-accent; -fx-border-color: -fx-accent; -fx-border-radius: 100em; -fx-background-color: rgba(0, 206, 201, 0.05);
+}
+
+.list-view, .list-cell { -fx-background-color: transparent; -fx-padding: 0; }
+.alarm-card { -fx-background-color: rgba(128, 128, 128, 0.05); -fx-background-radius: 15; -fx-padding: 10 20; }
+.dark-mode .alarm-card { -fx-background-color: rgba(255, 255, 255, 0.1); } 
+
+.alarm-time-text { -fx-font-size: 28px; -fx-text-fill: #2d3436; }
+.dark-mode .alarm-time-text { -fx-text-fill: white !important; }
+.alarm-date-text { -fx-font-size: 13px; -fx-text-fill: #b2bec3; }
+
+.window-title { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: -fx-text-fill; }
+.dark-mode .window-title { -fx-text-fill: white !important; }
+.window-button { -fx-background-color: transparent; -fx-text-fill: -fx-text-fill; -fx-font-size: 14px; -fx-cursor: hand; }
+.dark-mode .window-button { -fx-text-fill: white !important; }
+
+.alarm-screen-time { -fx-font-size: 110px; -fx-font-weight: bold; -fx-text-fill: -fx-accent; }
+.alarm-screen-date { -fx-font-size: 24px; -fx-text-fill: #b2bec3; }
+.stop-alarm-button { -fx-background-color: #ff7675; -fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold; -fx-background-radius: 100em; -fx-min-width: 200px; -fx-min-height: 200px; }
+.menu-bar { -fx-background-color: transparent; }
+.dark-mode .menu-item .label { -fx-text-fill: white; }
+.dark-mode .context-menu { -fx-background-color: #2d2d2d; }

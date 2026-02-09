@@ -1,0 +1,17 @@
+# Archivos compilados y empaquetados
+target/
+*.jar
+*.class
+
+# Archivos de configuración del IDE (VS Code, IntelliJ, Eclipse)
+.vscode/
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+bin/
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
